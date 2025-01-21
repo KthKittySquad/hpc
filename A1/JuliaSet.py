@@ -11,6 +11,7 @@ c_real, c_imag = -0.62772, -0.42193
 
 # decorator to time
 def timefn(fn):
+
     @wraps(fn)
     def measure_time(*args, **kwargs):
         t1 = time.time()
@@ -62,6 +63,7 @@ def calc_pure_python(desired_width, max_iterations):
     # assert sum(output) == 33219980
 
 
+@timer
 def calculate_z_serial_purepython(maxiter, zs, cs):
     """Calculate output list using Julia update rule"""
     output = [0] * len(zs)

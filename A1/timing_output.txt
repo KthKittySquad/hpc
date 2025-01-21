@@ -1,0 +1,166 @@
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.826120 seconds
+Standard Deviation: 0.022559 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.840150 seconds
+Standard Deviation: 0.015536 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.841228 seconds
+Standard Deviation: 0.017710 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.843763 seconds
+Standard Deviation: 0.023754 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.864127 seconds
+Standard Deviation: 0.036426 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.852536 seconds
+Standard Deviation: 0.033531 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.825032 seconds
+Standard Deviation: 0.011446 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.899050 seconds
+Standard Deviation: 0.168471 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.862361 seconds
+Standard Deviation: 0.010850 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.909285 seconds
+Standard Deviation: 0.049690 seconds
+Function: calc_pure_python
+Average Execution Time: 18.676618 seconds
+Standard Deviation: 0.266700 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.854121 seconds
+Standard Deviation: 0.039057 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.867932 seconds
+Standard Deviation: 0.058894 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.807795 seconds
+Standard Deviation: 0.005883 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.809511 seconds
+Standard Deviation: 0.007390 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.808222 seconds
+Standard Deviation: 0.007488 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.810130 seconds
+Standard Deviation: 0.013347 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.810585 seconds
+Standard Deviation: 0.009156 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.807664 seconds
+Standard Deviation: 0.007491 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.811654 seconds
+Standard Deviation: 0.008384 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.809988 seconds
+Standard Deviation: 0.006982 seconds
+Function: calc_pure_python
+Average Execution Time: 18.306992 seconds
+Standard Deviation: 0.208350 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.813386 seconds
+Standard Deviation: 0.006840 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.806715 seconds
+Standard Deviation: 0.006343 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.807515 seconds
+Standard Deviation: 0.007029 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.809294 seconds
+Standard Deviation: 0.006497 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.808349 seconds
+Standard Deviation: 0.004988 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.818708 seconds
+Standard Deviation: 0.013156 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.823663 seconds
+Standard Deviation: 0.013596 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.806404 seconds
+Standard Deviation: 0.005679 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.834541 seconds
+Standard Deviation: 0.028407 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.847861 seconds
+Standard Deviation: 0.035398 seconds
+Function: calc_pure_python
+Average Execution Time: 18.285242 seconds
+Standard Deviation: 0.131919 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.831571 seconds
+Standard Deviation: 0.011152 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.829259 seconds
+Standard Deviation: 0.010157 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.846858 seconds
+Standard Deviation: 0.053974 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.865792 seconds
+Standard Deviation: 0.051726 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.852276 seconds
+Standard Deviation: 0.034929 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.871569 seconds
+Standard Deviation: 0.032480 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.876317 seconds
+Standard Deviation: 0.022301 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.868884 seconds
+Standard Deviation: 0.020398 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.874411 seconds
+Standard Deviation: 0.050562 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.887012 seconds
+Standard Deviation: 0.034532 seconds
+Function: calc_pure_python
+Average Execution Time: 18.714665 seconds
+Standard Deviation: 0.186130 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.840332 seconds
+Standard Deviation: 0.012056 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.856272 seconds
+Standard Deviation: 0.015205 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.861453 seconds
+Standard Deviation: 0.045525 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.828210 seconds
+Standard Deviation: 0.012755 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.817661 seconds
+Standard Deviation: 0.012114 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.816851 seconds
+Standard Deviation: 0.013979 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.819627 seconds
+Standard Deviation: 0.024045 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.916410 seconds
+Standard Deviation: 0.135916 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.936731 seconds
+Standard Deviation: 0.128820 seconds
+Function: calculate_z_serial_purepython
+Average Execution Time: 1.858327 seconds
+Standard Deviation: 0.055197 seconds
+Function: calc_pure_python
+Average Execution Time: 18.661980 seconds
+Standard Deviation: 0.392671 seconds
+5 loops, best of 1: 185 sec per loop
