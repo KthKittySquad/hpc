@@ -2,8 +2,8 @@
 import time
 from functools import wraps
 from timeit import timeit
-from T1_2.decorator import timer
-from ..B.profiler import ProProfiler
+from E1.T1_2.decorator import timer
+from B.profiler import ProProfiler
 
 # area of complex space to investigate
 x1, x2, y1, y2 = -1.8, 1.8, -1.8, 1.8
@@ -71,8 +71,12 @@ if __name__ == "__main__":
     # Calculate the Julia set using a pure Python solution with
     # reasonable defaults for a laptop
     # t1 = time.time()
-    with ProProfiler(0.5) as profiler:
+    with ProProfiler(0.10) as profiler:
         calc_pure_python(desired_width=1000, max_iterations=300)
+    profiler.plot()
     profiler.summary_table()
+
+    # calc_pure_python(desired_width=1000, max_iterations=300)
+
     # t2 = time.time()
     # print(f"This run took a total of {t2 - t1:.6f} seconds")

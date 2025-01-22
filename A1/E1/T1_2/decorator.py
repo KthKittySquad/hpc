@@ -5,6 +5,7 @@ import numpy as np
 
 
 def timer(func: Callable) -> Callable:
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         arr = np.zeros((10,))

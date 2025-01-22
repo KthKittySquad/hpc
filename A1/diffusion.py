@@ -1,7 +1,8 @@
+from B.profiler import ProProfiler
 grid_shape = (640, 640)
 
 
-@profile
+# @profile
 def evolve(grid, dt, D=1.0):
     xmax, ymax = grid_shape
     new_grid = [[0.0] * ymax for x in range(xmax)]
@@ -17,7 +18,7 @@ def evolve(grid, dt, D=1.0):
     return new_grid
 
 
-@profile
+# @profile
 def run_experiment(num_iterations):
     # Setting up initial conditions 
     xmax, ymax = grid_shape
@@ -37,6 +38,10 @@ def run_experiment(num_iterations):
 
 
 if __name__ == "__main__":
-    num_of_iterations = 300
-    run_experiment(num_of_iterations)
+    with ProProfiler(0.5) as profiler:
+        num_of_iterations = 300
+        run_experiment(num_of_iterations)
+    
+    profiler.plot()
+    profiler.summary_table()
 
