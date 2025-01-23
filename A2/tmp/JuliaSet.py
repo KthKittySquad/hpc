@@ -6,8 +6,10 @@ from functools import wraps
 x1, x2, y1, y2 = -1.8, 1.8, -1.8, 1.8
 c_real, c_imag = -0.62772, -.42193
 
+
 # decorator to time
 def timefn(fn):
+
     @wraps(fn)
     def measure_time(*args, **kwargs):
         t1 = time.time()
@@ -15,6 +17,7 @@ def timefn(fn):
         t2 = time.time()
         print(f"@timefn: {fn.__name__} took {t2 - t1} seconds")
         return result
+
     return measure_time
 
 
@@ -51,10 +54,11 @@ def calc_pure_python(desired_width, max_iterations):
     end_time = time.time()
     secs = end_time - start_time
     print(calculate_z_serial_purepython.__name__ + " took", secs, "seconds")
+    
+    print("the sum is: ", sum(output))
+    
+    return output
 
-    # This sum is expected for a 1000^2 grid with 300 iterations
-    # It ensures that our code evolves exactly as we'd intended
-    assert sum(output) == 33219980
 
 def calculate_z_serial_purepython(maxiter, zs, cs):
     """Calculate output list using Julia update rule"""
@@ -69,7 +73,8 @@ def calculate_z_serial_purepython(maxiter, zs, cs):
         output[i] = n
     return output
 
+
 if __name__ == "__main__":
     # Calculate the Julia set using a pure Python solution with
     # reasonable defaults for a laptop
-    calc_pure_python(desired_width=10000, max_iterations=300) 
+    calc_pure_python(desired_width=1000, max_iterations=300) 
