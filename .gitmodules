@@ -1,0 +1,3 @@
+[submodule "project/neural"]
+	path = project/neural
+	url = git@github.com:pmocz/artificialneuralnetwork-python.git
