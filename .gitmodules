@@ -1,3 +1,6 @@
 [submodule "project/neural"]
 	path = project/neural
 	url = git@github.com:pmocz/artificialneuralnetwork-python.git
+[submodule "A2/pdb"]
+	path = A2/pdb
+	url = git@github.com:spiside/pdb-tutorial.git
