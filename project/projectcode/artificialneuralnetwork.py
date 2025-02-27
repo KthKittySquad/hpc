@@ -2,10 +2,11 @@ import matplotlib.pyplot as plt
 import numpy as np
 import timeit
 
-from cythonized.gradient import gradient
+# from cythonized.gradient import gradient
 from scipy import optimize
 from functools import partial
-from helper import g, grad_g, predict, reshape
+from helper import g, grad_g, predict, reshape, gradient
+from pathlib import Path
 
 """
 Create Your Own Artificial Neural Network for Multi-class Classification (With Python)
@@ -15,7 +16,8 @@ Create and train your own artificial neural network to classify images of galaxi
 
 """
 
-MAXITER = 100
+MAXITER = 50
+TRAINING_DIR = Path('./training/')
 	
 def cost_function(theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda):
 	""" Neural net cost function for a three layer classification network.
@@ -55,65 +57,6 @@ def cost_function(theta, input_layer_size, hidden_layer_size, num_labels, X, y, 
 	J += lmbda/(2.*m) * (np.sum(Theta1[:,1:]**2)  + np.sum(Theta2[:,1:]**2))
 	
 	return J
-
-
-# def gradient(theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda):
-# 	""" Neural net cost function gradient for a three layer classification network.
-# 	Input:
-# 	  theta               flattened vector of neural net model parameters
-# 	  input_layer_size    size of input layer
-# 	  hidden_layer_size   size of hidden layer
-# 	  num_labels          number of labels
-# 	  X                   matrix of training data
-# 	  y                   vector of training labels
-# 	  lmbda               regularization term
-# 	Output:
-# 	  grad                flattened vector of derivatives of the neural network 
-# 	"""
-	
-# 	# unflatten theta
-# 	Theta1, Theta2 = reshape(theta, input_layer_size, hidden_layer_size, num_labels)
-	
-# 	# number of training values
-# 	m = len(y)
-	
-# 	# Backpropagation: calculate the gradients Theta1_grad and Theta2_grad:
-	
-# 	Delta1 = np.zeros((hidden_layer_size,input_layer_size+1))
-# 	Delta2 = np.zeros((num_labels,hidden_layer_size+1))
-
-# 	for t in range(m):
-		
-# 		# forward very bad, very slow
-# 		a1 = X[t,:].reshape((input_layer_size,1))
-# 		a1 = np.vstack((1, a1))   #  +bias 		 				<--------- 12.7%
-# 		z2 = Theta1 @ a1 # 										<--------- 7.5%
-# 		a2 = g(z2)	#                     		       	    	<--------- 5.9%
-# 		a2 = np.vstack((1, a2))   #  +bias				    	<--------- 9.7%
-# 		a3 = g(Theta2 @ a2) # 									<--------- 7.7%
-		
-# 		# compute error for layer 3
-# 		y_k = np.zeros((num_labels,1))
-# 		y_k[y[t,0].astype(int)] = 1
-# 		delta3 = a3 - y_k
-# 		Delta2 += (delta3 @ a2.T)
-		
-# 		# compute error for layer 2
-# 		delta2 = (Theta2[:,1:].T @ delta3) * grad_g(z2)  # 		<--------- 11.9%
-# 		Delta1 += (delta2 @ a1.T)	 #                     		<--------- 33.4%
-
-# 	Theta1_grad = Delta1 / m
-# 	Theta2_grad = Delta2 / m
-
-# 	# add regularization
-# 	Theta1_grad[:,1:] += (lmbda/m) * Theta1[:,1:]	
-# 	Theta2_grad[:,1:] += (lmbda/m) * Theta2[:,1:]
-
-# 	# flatten gradients
-# 	grad = np.concatenate((Theta1_grad.flatten(), Theta2_grad.flatten()))
-
-# 	return grad
-
 
 N_iter = 1
 J_min = np.inf
@@ -181,15 +124,14 @@ def callbackF(input_layer_size, hidden_layer_size, num_labels, X, y, lmbda, test
 
 def main():
 	""" Artificial Neural Network for classifying galaxies """
- 
-	start_time = timeit.default_timer()
+
 	
 	# set the random number generator seed
 	np.random.seed(917)
 	
 	# Load the training and test datasets
-	train = np.genfromtxt('train.csv', delimiter=',')
-	test = np.genfromtxt('test.csv', delimiter=',')
+	train = np.genfromtxt(TRAINING_DIR / 'train.csv', delimiter=',')
+	test = np.genfromtxt(TRAINING_DIR / 'test.csv', delimiter=',')
 	
 	# get labels (0=Elliptical, 1=Spiral, 2=Irregular)
 	train_label = train[:,0].reshape(len(train),1)
@@ -234,6 +176,7 @@ def main():
 	# Minimize the cost function using a nonlinear conjugate gradient algorithm
 	args = (input_layer_size, hidden_layer_size, num_labels, X, y, lmbda)  # parameter values
 	cbf = partial(callbackF, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda, test, test_label)
+	start_time = timeit.default_timer()
 	theta = optimize.fmin_cg(cost_function, theta0, fprime=gradient, args=args, callback=cbf, maxiter=MAXITER)
 
 	# unflatten theta
