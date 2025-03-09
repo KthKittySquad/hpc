@@ -6,9 +6,12 @@ from scipy import optimize
 from functools import partial
 import multiprocessing as mp
 import timeit
+import torch
+import torch.nn.functional as F
 
 MAXITER = 50
 TRAINING_DIR = Path("./training/")
+DEVICE = None
 
 """
 Create Your Own Artificial Neural Network for Multi-class Classification (With Python)
@@ -116,8 +119,12 @@ def compute_grad_t(t, Theta1, Theta2, X, y, num_labels):
 
 
 def gradient(theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda):
-    if USE_MP:
+    if USE_MP and not USE_GPU:
         return mp_gradient(
+            theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda
+        )
+    elif USE_GPU and not USE_MP:
+        return torch_gradient(
             theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda
         )
     else:
@@ -268,6 +275,61 @@ def standard_gradient(
     return grad
 
 
+def torch_gradient(theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda):
+    """
+    Neural net cost function gradient for a three layer classification network.
+    This version uses PyTorch with GPU acceleration when available.
+    """
+
+    # convert
+    theta_tensor = torch.tensor(
+        theta, dtype=torch.float32, device=DEVICE, requires_grad=True
+    )
+    X_tensor = torch.tensor(X, dtype=torch.float32, device=DEVICE)
+
+    y_tensor = torch.zeros(len(y), num_labels, dtype=torch.float32, device=DEVICE)
+    for i in range(len(y)):
+        y_tensor[i, int(y[i, 0])] = 1.0
+
+    ncut = hidden_layer_size * (input_layer_size + 1)
+    Theta1_tensor = theta_tensor[:ncut].reshape(hidden_layer_size, input_layer_size + 1)
+    Theta2_tensor = theta_tensor[ncut:].reshape(num_labels, hidden_layer_size + 1)
+
+    m = X.shape[0]
+
+    a1 = torch.cat([torch.ones(m, 1, device=DEVICE), X_tensor], dim=1)
+
+    # Hidden layer activation
+    z2 = torch.mm(a1, Theta1_tensor.t())
+    a2 = torch.sigmoid(z2)
+
+    # Add bias to hidden layer
+    a2 = torch.cat([torch.ones(m, 1, device=DEVICE), a2], dim=1)
+
+    # Output layer activation
+    z3 = torch.mm(a2, Theta2_tensor.t())
+    a3 = torch.sigmoid(z3)
+
+    # Cost calculation
+    cost = (
+        -torch.sum(y_tensor * torch.log(a3) + (1.0 - y_tensor) * torch.log(1.0 - a3))
+        / m
+    )
+
+    # Add regularization
+    reg_term = (lmbda / (2.0 * m)) * (
+        torch.sum(Theta1_tensor[:, 1:] ** 2) + torch.sum(Theta2_tensor[:, 1:] ** 2)
+    )
+    cost += reg_term
+
+    # Compute gradients via autograd
+    cost.backward()
+
+    # Return gradients as numpy array
+    grad_flat = theta_tensor.grad.cpu().numpy()
+    return grad_flat
+
+
 N_iter = 1
 J_min = np.inf
 theta_best = []
@@ -321,15 +383,17 @@ def callbackF(
 def main():
     """Artificial Neural Network for classifying galaxies"""
 
-    global USE_MP, pool
+    global USE_MP, USE_GPU, pool
     parser = argparse.ArgumentParser(
         description="Neural network for galaxy classification"
     )
     parser.add_argument("--mp", action="store_true", help="Enable multiprocessing")
+    parser.add_argument("--torch", action="store_true", help="Enable torch")
     args = parser.parse_args()
     USE_MP = args.mp
+    USE_GPU = args.torch
 
-    if USE_MP:
+    if not USE_GPU and USE_MP:
         pool = mp.Pool()
 
     np.random.seed(917)
