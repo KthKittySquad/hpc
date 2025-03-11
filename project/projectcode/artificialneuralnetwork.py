@@ -1,12 +1,15 @@
+# The code snippet you provided is importing various Python libraries and modules that are necessary
+# for running the artificial neural network (ANN) program. Here is a breakdown of what each import
+# statement is doing:
 import matplotlib.pyplot as plt
 import numpy as np
 import timeit
 
-# from cythonized.gradient import gradient
+# from cythonized.gradient import gradient, g, grad_g, predict, reshape, cost_function
 from scipy import optimize
 from functools import partial
-from helper import g, grad_g, predict, reshape, gradient
 from pathlib import Path
+from helper import gradient, g, grad_g, predict, reshape, cost_function
 
 """
 Create Your Own Artificial Neural Network for Multi-class Classification (With Python)
@@ -16,47 +19,8 @@ Create and train your own artificial neural network to classify images of galaxi
 
 """
 
-MAXITER = 50
+MAXITER = 600
 TRAINING_DIR = Path('./training/')
-	
-def cost_function(theta, input_layer_size, hidden_layer_size, num_labels, X, y, lmbda):
-	""" Neural net cost function for a three layer classification network.
-	Input:
-	  theta               flattened vector of neural net model parameters
-	  input_layer_size    size of input layer
-	  hidden_layer_size   size of hidden layer
-	  num_labels          number of labels
-	  X                   matrix of training data
-	  y                   vector of training labels
-	  lmbda               regularization term
-	Output:
-	  J                   cost function
-	"""
-	
-	# unflatten theta
-	Theta1, Theta2 = reshape(theta, input_layer_size, hidden_layer_size, num_labels)
-	
-	# number of training values
-	m = len(y)
-	
-	# Feedforward: calculate the cost function J:
-	
-	a1 = np.hstack((np.ones((m,1)), X))   
-	a2 = g(a1 @ Theta1.T)                 
-	a2 = np.hstack((np.ones((m,1)), a2))  
-	a3 = g(a2 @ Theta2.T)                 
-
-	y_mtx = 1.*(y==0)
-	for k in range(1,num_labels):
-		y_mtx = np.hstack((y_mtx, 1.*(y==k)))
-
-	# cost function
-	J = np.sum( -y_mtx * np.log(a3) - (1.0-y_mtx) * np.log(1.0-a3) ) / m
-
-	# add regularization
-	J += lmbda/(2.*m) * (np.sum(Theta1[:,1:]**2)  + np.sum(Theta2[:,1:]**2))
-	
-	return J
 
 N_iter = 1
 J_min = np.inf
@@ -120,8 +84,7 @@ def callbackF(input_layer_size, hidden_layer_size, num_labels, X, y, lmbda, test
 	# plt.ylim(1,2.1)
 	# plt.gca().legend()
 	# plt.pause(0.001)
-
-
+ 
 def main():
 	""" Artificial Neural Network for classifying galaxies """
 
