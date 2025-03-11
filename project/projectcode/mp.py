@@ -9,9 +9,9 @@ import timeit
 import torch
 import torch.nn.functional as F
 
-MAXITER = 50
+MAXITER = 600
 TRAINING_DIR = Path("./training/")
-DEVICE = None
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 """
 Create Your Own Artificial Neural Network for Multi-class Classification (With Python)
